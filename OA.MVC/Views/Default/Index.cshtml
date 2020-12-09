@@ -1,0 +1,105 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //模拟登陆
+            $('#btn').click(function () {
+                GetTokenAndRefreshToken();
+            });
+
+            //获取Token
+            function GetTokenAndRefreshToken() {
+                $.post('https://localhost:5001/api/AccessToken/GetToken').done(function (data) {
+                    saveAccessToken(data.accessToken);
+                    saveRefreshToken(data.refreshToken);
+                });
+            }
+
+            $('#btn-currentTime').click(function () {
+                GetCurrentTime();
+            });
+
+            //调用客户端获取当前时间
+            function GetCurrentTime() {
+                $.ajax({
+                    type: 'get',
+                    contentType: 'application/json',
+                    url: 'https://localhost:5001/api/Test',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', getAccessToken());
+                    },
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (xhr) {
+                        if (xhr.status === 401 && xhr.getResponseHeader('act') === 'expired') {
+                            /* 访问令牌肯定已过期，将当前请求传入获取刷新令牌方法，
+                             * 以便获取刷新令牌换取新的令牌后继续当前请求
+                            */
+                            GetRefreshToken(GetCurrentTime);
+                        }
+                    }
+                });
+            }
+
+            //从localStorage获取AccessToken
+            function getAccessToken() {
+                return localStorage.getItem('accessToken');
+            }
+
+            //从localStorage获取RefreshToken
+            function getRefreshToken() {
+                return localStorage.getItem('refreshToken');
+            }
+
+            //保存AccessToken到localStorage
+            function saveAccessToken(token) {
+                localStorage.setItem('accessToken', token);
+            }
+
+            //保存RefreshToken到localStorage
+            function saveRefreshToken(refreshToken) {
+                localStorage.setItem('refreshToken', refreshToken);
+            }
+
+            //获取刷新Token
+            function GetRefreshToken(func) {
+                var model = {
+                    accessToken: getAccessToken(),      //已过期令牌
+                    refreshToken: getRefreshToken()     //刷新令牌
+                };
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: 'https://localhost:5001/api/account/refresh-token',
+                    dataType: "json",
+                    data: JSON.stringify(model),
+                    success: function (data) {
+                        if (!data.accessToken && !data.refreshToken) {
+                            // 跳转至登录
+                        } else {
+                            saveAccessToken(data.accessToken);
+                            saveRefreshToken(data.refreshToken);
+                            func();
+                        }
+                    }
+                });
+            }
+        })
+    </script>
+</head>
+<body>
+    <button id="btn">登录</button>
+    <button id="btn-currentTime">btn-currentTime</button>
+</body>
+</html>

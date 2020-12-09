@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OA.WebAPI", "OA.WebAPI\OA.W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OA.Test", "OA.Test\OA.Test.csproj", "{91784400-D637-458F-9EE7-829ABB61EF74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OA.MVC", "..\OA.MVC\OA.MVC.csproj", "{EB172356-724A-404E-A7E2-350B5DCF2ACE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OA.MVC", "OA.MVC\OA.MVC.csproj", "{5E91C560-0ADB-4189-81EF-C882C84228B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{91784400-D637-458F-9EE7-829ABB61EF74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91784400-D637-458F-9EE7-829ABB61EF74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91784400-D637-458F-9EE7-829ABB61EF74}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB172356-724A-404E-A7E2-350B5DCF2ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB172356-724A-404E-A7E2-350B5DCF2ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB172356-724A-404E-A7E2-350B5DCF2ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB172356-724A-404E-A7E2-350B5DCF2ACE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E91C560-0ADB-4189-81EF-C882C84228B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E91C560-0ADB-4189-81EF-C882C84228B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E91C560-0ADB-4189-81EF-C882C84228B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E91C560-0ADB-4189-81EF-C882C84228B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
