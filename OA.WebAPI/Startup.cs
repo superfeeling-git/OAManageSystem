@@ -96,7 +96,8 @@ namespace OA.WebAPI
 
             //添加Identity服务
             services.AddIdentity<OmsUser, OmsRoles>()
-                .AddEntityFrameworkStores<OADbContext>();
+                .AddEntityFrameworkStores<OADbContext>()
+                .AddErrorDescriber<CustomIdentityError>();
 
             var Issurer = "JWTBearer.Auth";  //发行人
             var Audience = "api.auth";       //受众人

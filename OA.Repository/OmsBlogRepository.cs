@@ -4,6 +4,8 @@ using OA.Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace OA.Repository
 {
@@ -12,7 +14,7 @@ namespace OA.Repository
         public OmsBlogRepository(OADbContext oADbContext)
             :base(oADbContext)
         {
-
+            
         }
     }
 }

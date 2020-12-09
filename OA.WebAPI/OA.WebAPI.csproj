@@ -30,6 +30,7 @@
     <ProjectReference Include="..\OA.Model\OA.Model.csproj" />
     <ProjectReference Include="..\OA.Repository\OA.Repository.csproj" />
     <ProjectReference Include="..\OA.Service\OA.Service.csproj" />
+    <ProjectReference Include="..\OA.Utility\OA.Utility.csproj" />
   </ItemGroup>
 
 

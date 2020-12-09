@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OA.Model;
 
 namespace OA.Model.Migrations
 {
     [DbContext(typeof(OADbContext))]
-    partial class OADbContextModelSnapshot : ModelSnapshot
+    [Migration("20201209151206_initialCreate_7")]
+    partial class initialCreate_7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,10 +161,16 @@ namespace OA.Model.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("MenuID")
+                        .HasColumnType("int");
+
                     b.Property<long?>("OmsRolesId")
                         .HasColumnType("bigint");
 
                     b.Property<int?>("OmsSysMenuMenuID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");

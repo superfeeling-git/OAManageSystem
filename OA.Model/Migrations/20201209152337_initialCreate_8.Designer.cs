@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OA.Model;
 
 namespace OA.Model.Migrations
 {
     [DbContext(typeof(OADbContext))]
-    partial class OADbContextModelSnapshot : ModelSnapshot
+    [Migration("20201209152337_initialCreate_8")]
+    partial class initialCreate_8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,28 +152,6 @@ namespace OA.Model.Migrations
                     b.HasKey("MenuID");
 
                     b.ToTable("OmsSysMenu");
-                });
-
-            modelBuilder.Entity("OA.Model.Entity.OmsSysMenuRole", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<long?>("OmsRolesId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int?>("OmsSysMenuMenuID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("OmsRolesId");
-
-                    b.HasIndex("OmsSysMenuMenuID");
-
-                    b.ToTable("OmsSysMenuRole");
                 });
 
             modelBuilder.Entity("OA.Model.Entity.OmsUser", b =>
@@ -351,21 +331,6 @@ namespace OA.Model.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("OA.Model.Entity.OmsSysMenuRole", b =>
-                {
-                    b.HasOne("OA.Model.Entity.OmsRoles", "OmsRoles")
-                        .WithMany()
-                        .HasForeignKey("OmsRolesId");
-
-                    b.HasOne("OA.Model.Entity.OmsSysMenu", "OmsSysMenu")
-                        .WithMany()
-                        .HasForeignKey("OmsSysMenuMenuID");
-
-                    b.Navigation("OmsRoles");
-
-                    b.Navigation("OmsSysMenu");
                 });
 
             modelBuilder.Entity("OA.Model.Entity.OmsUserClaims", b =>

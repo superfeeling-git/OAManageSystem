@@ -7,5 +7,6 @@ namespace OA.Model.Entity
 {
     public class OmsUserRoles : IdentityUserRole<long>
     {
+
     }
 }

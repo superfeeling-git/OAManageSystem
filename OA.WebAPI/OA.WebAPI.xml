@@ -58,6 +58,24 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:OA.WebAPI.Controllers.UserController.Register(OA.Model.Model.OmsUserModel)">
+            <summary>
+            注册
+            </summary>
+            <param name="omsUser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OA.WebAPI.Controllers.UserController.Login(OA.Model.Model.OmsUserModel)">
+            <summary>
+            登录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:OA.WebAPI.CustomIdentityError">
+            <summary>
+            自定义错误信息
+            </summary>
+        </member>
         <member name="P:OA.WebAPI.Startup.ApiName">
             <summary>
             {ApiName} 定义成全局变量，方便修改

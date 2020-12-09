@@ -29,6 +29,11 @@ namespace OA.Model
             builder.Entity<OmsUserRoles>().ToTable("OmsUserRoles");
             builder.Entity<OmsUserTokens>().ToTable("OmsUserTokens");
 
+            builder.Entity<OmsUser>(Entity => {
+                Entity.Property("RefreshToken")
+                    .HasMaxLength(100);
+            });
+
             builder.Entity<OmsBlog>(entity => {
                 //映射表名、配置外键及外键约束名
                 entity.ToTable("OmsBlogs")
@@ -56,20 +61,29 @@ namespace OA.Model
                     .HasDefaultValueSql("getdate()");   //配置字段默认值
             });
 
-
+            builder.Entity<OmsSysMenu>(entity => {
+                entity.HasKey("MenuID");
+            });
 
             builder.Entity<OmsBlogCategory>(entity => {
                 entity.ToTable("OmsBlogCategory");
 
                 entity.HasKey(e => e.CategoryID)
                     .HasName("PK_CategoryID");
-            });
-            
+            });            
         }
 
         //可以用于EF表查询
         public DbSet<OmsBlogCategory> OmsBlogCategory { get; set; }
-
         public DbSet<OmsBlog> OmsBlog { get; set; }
+        public DbSet<OmsRoleClaims> OmsRoleClaims { get; set; }
+        public DbSet<OmsRoles> OmsRoles { get; set; }
+        public DbSet<OmsUser> OmsUser { get; set; }
+        public DbSet<OmsUserClaims> OmsUserClaims { get; set; }
+        public DbSet<OmsUserLogins> OmsUserLogins { get; set; }
+        public DbSet<OmsUserRoles> OmsUserRoles { get; set; }
+        public DbSet<OmsUserTokens> OmsUserTokens { get; set; }
+        public DbSet<OmsSysMenu> OmsSysMenu { get; set; }
+        public DbSet<OmsSysMenuRole> OmsSysMenuRole { get; set; }
     }
 }
