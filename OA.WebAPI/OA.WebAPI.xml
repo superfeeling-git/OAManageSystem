@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OA.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="M:OA.WebAPI.Controllers.BlogCategoryController.Create(OA.Model.Entity.OmsBlogCategory)">
+            <summary>
+            添加博客分类
+            </summary>
+            <param name="omsBlogCategory">实体类参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:OA.WebAPI.Controllers.BlogController.CreateAsync(OA.Model.Entity.OmsBlog)">
+            <summary>
+            添加博客
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:OA.WebAPI.Startup.ApiName">
+            <summary>
+            {ApiName} 定义成全局变量，方便修改
+            </summary>
+        </member>
+    </members>
+</doc>

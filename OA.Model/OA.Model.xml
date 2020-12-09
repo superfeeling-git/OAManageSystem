@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OA.Model</name>
+    </assembly>
+    <members>
+        <member name="T:OA.Model.Entity.OmsBlogCategory">
+            <summary>
+            博客分类实体
+            </summary>
+        </member>
+        <member name="P:OA.Model.Entity.OmsBlogCategory.CategoryID">
+            <summary>
+            分类ID
+            </summary>
+        </member>
+        <member name="P:OA.Model.Entity.OmsBlogCategory.CategoryName">
+            <summary>
+            分类名称
+            </summary>
+        </member>
+        <member name="P:OA.Model.Entity.OmsBlogCategory.CategoryOrder">
+            <summary>
+            分类排序
+            </summary>
+        </member>
+    </members>
+</doc>
