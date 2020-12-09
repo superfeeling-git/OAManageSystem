@@ -4,6 +4,47 @@
         <name>OA.WebAPI</name>
     </assembly>
     <members>
+        <member name="M:OA.WebAPI.Auth.User.IsValidRefreshToken(System.String)">
+            <summary>
+            验证刷新token是否存在或过期
+            </summary>
+            <param name="refreshToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OA.WebAPI.Auth.User.CreateRefreshToken(System.String,System.String,System.Double)">
+            <summary>
+            创建刷新Token
+            </summary>
+            <param name="token"></param>
+            <param name="userId"></param>
+            <param name="minutes"></param>
+        </member>
+        <member name="M:OA.WebAPI.Auth.User.RemoveRefreshToken(System.String)">
+            <summary>
+            移除刷新token
+            </summary>
+            <param name="refreshToken"></param>
+        </member>
+        <member name="M:OA.WebAPI.Controllers.AccessTokenController.GenerateAccessToken(System.Security.Claims.Claim[])">
+            <summary>
+            生成访问令牌
+            </summary>
+            <param name="claims"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OA.WebAPI.Controllers.AccessTokenController.GenerateRefreshToken">
+            <summary>
+            生成刷新Token
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OA.WebAPI.Controllers.AccessTokenController.GetPrincipalFromAccessToken(System.String)">
+            <summary>
+            从Token中获取用户身份
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
         <member name="M:OA.WebAPI.Controllers.BlogCategoryController.Create(OA.Model.Entity.OmsBlogCategory)">
             <summary>
             添加博客分类

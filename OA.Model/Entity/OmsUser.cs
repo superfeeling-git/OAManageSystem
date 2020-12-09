@@ -12,6 +12,10 @@ namespace OA.Model.Entity
         public string Province { get; set; }
         public string City { get; set; }
         public string Area { get; set; }
+        /// <summary>
+        /// 刷新令牌
+        /// </summary>
+        public string RefreshToken { get; set; }
         #endregion
     }
 }

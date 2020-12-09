@@ -71,6 +71,20 @@ namespace OA.WebAPI
             //    options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
             //});
 
+            //添加cors 服务 配置跨域处理   
+            services.AddCors(options =>
+            {
+                options.AddPolicy("any", builder =>
+                {
+                    builder.WithMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS")
+                    //.AllowCredentials()//指定处理cookie
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin(); //允许任何来源的主机访问
+                });
+            });
+
+
+
             //设置默认的Identity密码强度
             services.Configure<IdentityOptions>(options => {
                 options.Password.RequiredUniqueChars = 3;
@@ -98,21 +112,32 @@ namespace OA.WebAPI
             .AddJwtBearer(o => {
                 o.TokenValidationParameters = new TokenValidationParameters
                 {
-                        //是否验证发行人
-                        ValidateIssuer = true,
-                    ValidIssuer = Issurer,//发行人
+                //是否验证发行人
+                ValidateIssuer = true,
+                ValidIssuer = Issurer,//发行人
 
-                        //是否验证受众人
-                        ValidateAudience = true,
-                    ValidAudience = Audience,//受众人
+                //是否验证受众人
+                ValidateAudience = true,
+                ValidAudience = Audience,//受众人
 
-                        //是否验证密钥
-                        ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretCredentials)),
+                //是否验证密钥
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretCredentials)),
 
-                    ValidateLifetime = true, //验证生命周期
-                        RequireExpirationTime = true //过期时间
-                    };
+                ValidateLifetime = true, //验证生命周期
+                    RequireExpirationTime = true //过期时间
+                };
+                o.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                        {
+                            context.Response.Headers.Add("act", "expired");
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
             });
 
             services.AddAuthorization(options => {
@@ -174,7 +199,7 @@ namespace OA.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            app.UseHttpsRedirection().UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseSwagger();
 
@@ -194,6 +219,8 @@ namespace OA.WebAPI
             app.UseAuthentication();    //添加身份认证中间件
 
             app.UseAuthorization();
+
+            app.UseCors("any");
 
             app.UseEndpoints(endpoints =>
             {

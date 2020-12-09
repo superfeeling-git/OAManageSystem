@@ -66,5 +66,10 @@ namespace OA.Model
             });
             
         }
+
+        //可以用于EF表查询
+        public DbSet<OmsBlogCategory> OmsBlogCategory { get; set; }
+
+        public DbSet<OmsBlog> OmsBlog { get; set; }
     }
 }

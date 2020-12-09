@@ -24,5 +24,10 @@
             分类排序
             </summary>
         </member>
+        <member name="P:OA.Model.Entity.OmsUser.RefreshToken">
+            <summary>
+            刷新令牌
+            </summary>
+        </member>
     </members>
 </doc>

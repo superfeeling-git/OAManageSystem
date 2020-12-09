@@ -34,14 +34,13 @@ namespace OA.WebAPI.Controllers
         {
             await OmsBlogService.CreateAsync(omsBlog);
 
-            return Ok(nameof(Task<IActionResult>));
+            return Ok();
         }
 
-        [HttpGet]
-        [AllowAnonymous]
+        [HttpGet("/api/test")]
         public IActionResult Test()
         {
-            return new JsonResult(new { student = "张三" });
+            return Ok(Guid.NewGuid().ToString("N"));
         }
     }
 }
