@@ -71,6 +71,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:OA.WebAPI.Controllers.UserController.GetUserAsync(System.String)">
+            <summary>
+            获取用户
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:OA.WebAPI.CustomIdentityError">
             <summary>
             自定义错误信息

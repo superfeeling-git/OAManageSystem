@@ -8,6 +8,7 @@ using OA.Model.Model;
 using OA.Model.Entity;
 using OA.Utility;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 
 namespace OA.WebAPI.Controllers
 {
@@ -87,6 +88,18 @@ namespace OA.WebAPI.Controllers
             var msg = ModelState.Values.SelectMany(m => m.Errors).Select(s => s.ErrorMessage);
 
             return Ok(msg);
+        }
+
+        /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetUserAsync(string Email)
+        {
+            var result = await _userManager.FindByEmailAsync(Email);
+            
+            return Ok(result);
         }
     }
 }

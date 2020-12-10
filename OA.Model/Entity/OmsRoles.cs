@@ -7,5 +7,6 @@ namespace OA.Model.Entity
 {
     public class OmsRoles : IdentityRole<long>
     {
+        public IEnumerable<OmsSysMenuRole> OmsSysMenuRole { get; set; }
     }
 }

@@ -159,17 +159,17 @@ namespace OA.Model.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<long?>("OmsRolesId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int?>("OmsSysMenuMenuID")
+                    b.Property<int>("MenuID")
                         .HasColumnType("int");
+
+                    b.Property<long>("RoleID")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("OmsRolesId");
+                    b.HasIndex("MenuID");
 
-                    b.HasIndex("OmsSysMenuMenuID");
+                    b.HasIndex("RoleID");
 
                     b.ToTable("OmsSysMenuRole");
                 });
@@ -355,13 +355,17 @@ namespace OA.Model.Migrations
 
             modelBuilder.Entity("OA.Model.Entity.OmsSysMenuRole", b =>
                 {
-                    b.HasOne("OA.Model.Entity.OmsRoles", "OmsRoles")
-                        .WithMany()
-                        .HasForeignKey("OmsRolesId");
-
                     b.HasOne("OA.Model.Entity.OmsSysMenu", "OmsSysMenu")
-                        .WithMany()
-                        .HasForeignKey("OmsSysMenuMenuID");
+                        .WithMany("OmsSysMenuRole")
+                        .HasForeignKey("MenuID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OA.Model.Entity.OmsRoles", "OmsRoles")
+                        .WithMany("OmsSysMenuRole")
+                        .HasForeignKey("RoleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("OmsRoles");
 
@@ -408,6 +412,16 @@ namespace OA.Model.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("OA.Model.Entity.OmsRoles", b =>
+                {
+                    b.Navigation("OmsSysMenuRole");
+                });
+
+            modelBuilder.Entity("OA.Model.Entity.OmsSysMenu", b =>
+                {
+                    b.Navigation("OmsSysMenuRole");
                 });
 #pragma warning restore 612, 618
         }

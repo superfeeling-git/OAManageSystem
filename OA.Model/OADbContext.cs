@@ -65,6 +65,13 @@ namespace OA.Model
                 entity.HasKey("MenuID");
             });
 
+           
+            builder.Entity<OmsSysMenuRole>(Entity => {
+                Entity.HasKey("ID");
+                Entity.HasOne<OmsSysMenu>(m => m.OmsSysMenu).WithMany(o => o.OmsSysMenuRole).HasForeignKey(key => key.MenuID);
+                Entity.HasOne<OmsRoles>(m => m.OmsRoles).WithMany(o => o.OmsSysMenuRole).HasForeignKey(key => key.RoleID);
+            });
+
             builder.Entity<OmsBlogCategory>(entity => {
                 entity.ToTable("OmsBlogCategory");
 

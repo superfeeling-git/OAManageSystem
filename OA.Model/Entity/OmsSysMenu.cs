@@ -11,5 +11,6 @@ namespace OA.Model.Entity
         public int ParentID { get; set; }
         public int Depth { get; set; }
         public string ParentPath { get; set; }
+        public IEnumerable<OmsSysMenuRole> OmsSysMenuRole { get; set; }
     }
 }

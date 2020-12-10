@@ -10,8 +10,8 @@ using OA.Model;
 namespace OA.Model.Migrations
 {
     [DbContext(typeof(OADbContext))]
-    [Migration("20201209152337_initialCreate_8")]
-    partial class initialCreate_8
+    [Migration("20201210010611_initialCreate_9")]
+    partial class initialCreate_9
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -152,6 +152,28 @@ namespace OA.Model.Migrations
                     b.HasKey("MenuID");
 
                     b.ToTable("OmsSysMenu");
+                });
+
+            modelBuilder.Entity("OA.Model.Entity.OmsSysMenuRole", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("MenuID")
+                        .HasColumnType("int");
+
+                    b.Property<long>("RoleID")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("MenuID");
+
+                    b.HasIndex("RoleID");
+
+                    b.ToTable("OmsSysMenuRole");
                 });
 
             modelBuilder.Entity("OA.Model.Entity.OmsUser", b =>
@@ -333,6 +355,25 @@ namespace OA.Model.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("OA.Model.Entity.OmsSysMenuRole", b =>
+                {
+                    b.HasOne("OA.Model.Entity.OmsSysMenu", "OmsSysMenu")
+                        .WithMany("OmsSysMenuRole")
+                        .HasForeignKey("MenuID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OA.Model.Entity.OmsRoles", "OmsRoles")
+                        .WithMany("OmsSysMenuRole")
+                        .HasForeignKey("RoleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OmsRoles");
+
+                    b.Navigation("OmsSysMenu");
+                });
+
             modelBuilder.Entity("OA.Model.Entity.OmsUserClaims", b =>
                 {
                     b.HasOne("OA.Model.Entity.OmsUser", null)
@@ -373,6 +414,16 @@ namespace OA.Model.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("OA.Model.Entity.OmsRoles", b =>
+                {
+                    b.Navigation("OmsSysMenuRole");
+                });
+
+            modelBuilder.Entity("OA.Model.Entity.OmsSysMenu", b =>
+                {
+                    b.Navigation("OmsSysMenuRole");
                 });
 #pragma warning restore 612, 618
         }
