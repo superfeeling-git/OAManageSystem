@@ -17,6 +17,8 @@ namespace OA.WebAPI.Controllers
     {
         private UserManager<OmsUser> _userManager;
         private SignInManager<OmsUser> _signInManager;
+        private RoleManager<OmsUser> roleManager;
+
         private ILogger<UserController> _logger;
 
         public UserController(UserManager<OmsUser> userManager, SignInManager<OmsUser> signInManager, ILogger<UserController> logger)

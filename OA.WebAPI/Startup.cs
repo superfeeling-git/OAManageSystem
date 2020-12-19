@@ -31,6 +31,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using OA.IService;
 
 namespace OA.WebAPI
 {
@@ -83,8 +84,6 @@ namespace OA.WebAPI
                 });
             });
 
-
-
             //设置默认的Identity密码强度
             services.Configure<IdentityOptions>(options => {
                 options.Password.RequiredUniqueChars = 3;
@@ -128,6 +127,8 @@ namespace OA.WebAPI
                 ValidateLifetime = true, //验证生命周期
                     RequireExpirationTime = true //过期时间
                 };
+                
+
                 o.Events = new JwtBearerEvents
                 {
                     OnAuthenticationFailed = context =>
@@ -147,7 +148,7 @@ namespace OA.WebAPI
                 });
             });
 
-            //services.AddSingleton<IAuthorizationHandler, PermissionRequirementHandler>();
+            services.AddSingleton<IAuthorizationHandler, PermissionRequirementHandler>();
 
             var basePath = ApplicationEnvironment.ApplicationBasePath;
             services.AddSwaggerGen(c =>
@@ -237,9 +238,31 @@ namespace OA.WebAPI
 
     public class PermissionRequirementHandler : AuthorizationHandler<PermissionRequirement>, IAuthorizationHandler
     {
+        /// <summary>
+        /// 注入
+        /// </summary>
+        private IOmsBlogService OmsBlogService;
+
+        /// <summary>
+        /// 构造函数注入
+        /// </summary>
+        /// <param name="_OmsBlogService"></param>
+        public PermissionRequirementHandler(IOmsBlogService _OmsBlogService)
+        {
+            this.OmsBlogService = _OmsBlogService;
+        }
+
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
         {
             var endpoint = context.Resource as RouteEndpoint;
+
+            string s = endpoint.RoutePattern.RawText;
+
+            string disp = endpoint.DisplayName;
+
+            List<OmsBlog> omsBlogs = OmsBlogService.GetAllAsync().Result;
+
+            //endpoint.RoutePattern.
 
             var descriptor = endpoint?.Metadata?
                 .SingleOrDefault(md => md is ControllerActionDescriptor) as ControllerActionDescriptor;
@@ -250,6 +273,10 @@ namespace OA.WebAPI
             var _controllerName = descriptor.ControllerName;
             var _actionName = descriptor.ActionName;
 
+            //blog/add
+
+            //{blog/}
+
             string name = context.User.Identity.Name;
 
             var role = context.User.FindFirst(c => c.Type == ClaimTypes.Role);
@@ -257,6 +284,8 @@ namespace OA.WebAPI
             {
                 var roleValue = role.Value;
                 context.Succeed(requirement);
+
+                context.Fail();
             }
             return Task.CompletedTask;
         }

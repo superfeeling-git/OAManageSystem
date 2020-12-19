@@ -58,6 +58,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:OA.WebAPI.Controllers.BlogController.List">
+            <summary>
+            列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:OA.WebAPI.Controllers.UserController.Register(OA.Model.Model.OmsUserModel)">
             <summary>
             注册

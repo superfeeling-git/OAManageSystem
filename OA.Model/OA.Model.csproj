@@ -9,6 +9,18 @@
     <DocumentationFile>E:\Teaching\OAManageSystem\OA.Model\OA.Model.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="OA.Model.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="OA.Model.xml" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />

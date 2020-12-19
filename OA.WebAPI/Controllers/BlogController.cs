@@ -37,6 +37,17 @@ namespace OA.WebAPI.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// 列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> List()
+        {
+            return new JsonResult(await OmsBlogService.GetAllAsync());
+        }
+
         [HttpGet("/api/test")]
         public IActionResult Test()
         {
